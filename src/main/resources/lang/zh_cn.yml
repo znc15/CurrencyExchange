@@ -1,0 +1,39 @@
+#       ____                                     _____          _
+#     / ___|   _ _ __ _ __ ___ _ __   ___ _   _| ____|_  _____| |__   __ _ _ __   __ _  ___
+#    | |  | | | | '__| '__/ _ \ '_ \ / __| | | |  _| \ \/ / __| '_ \ / _` | '_ \ / _` |/ _ \
+#    | |__| |_| | |  | | |  __/ | | | (__| |_| | |___ >  < (__| | | | (_| | | | | (_| |  __/
+#    \____\__,_|_|  |_|  \___|_| |_|\___|\__, |_____/_/\_\___|_| |_|\__,_|_| |_|\__, |\___|
+#                                        |___/                                  |___/
+#zh_cn.yml
+#
+messages:
+  usage: "&e用法: /rp <v|p> <数量> | /rp confirm | /rp reload | /rp rate | /rp help | /rp cancel"
+  invalidAmount: "&c无效的数量。"
+  confirmCurrencyToPoints: "&a你需要 %currency% 货币兑换 %points% 点券。输入 '/rp confirm' 进行确认。"
+  confirmPointsToCurrency: "&a你需要 %points% 点券兑换 %currency% 货币。输入 '/rp confirm' 进行确认。"
+  notEnoughCurrency: "&c你的货币不足。"
+  notEnoughPoints: "&c你的点券不足。"
+  successCurrencyToPoints: "&a成功兑换 %currency% 货币为 %points% 点券。"
+  successPointsToCurrency: "&a成功兑换 %points% 点券为 %currency% 货币。"
+  exchangeCancelled: "&e兑换已取消。"
+  nonPlayer: "&c此命令只能由玩家执行。"
+  noPendingRequest: "&e没有待确认的兑换请求。"
+  requestTimeout: "&e你的兑换请求已超时取消。"
+  reloadSuccess: "&a配置文件已重新加载。"
+  enterPointsAmount: "&e请输入需要兑换的点券数量。使用 /rp v <数量> 命令进行兑换。"
+  enterCurrencyAmount: "&e请输入需要兑换的货币数量。使用 /rp p <数量> 命令进行兑换。"
+  currentExchangeRate: "&a当前游戏内汇率为：%rate%"
+  helpMessage: |
+    &e命令帮助：
+    &6/rp v <数量> &7- 兑换货币为点券
+    &6/rp p <数量> &7- 兑换点券为货币
+    &6/rp confirm &7- 确认当前兑换请求
+    &6/rp reload &7- 重新加载配置文件
+    &6/rp rate &7- 显示当前游戏内汇率
+    &6/rp help &7- 显示此帮助信息
+    &6/rp cancel &7- 取消当前兑换请求
+  updateAvailable: "&e有新版本可用！访问 https://github.com/znc15/CurrencyExchange 下载最新版本。"
+  noUpdateAvailable: "&a你已使用最新版本。"
+  updateCheckFailed: "&c检查更新失败。"
+
+#Version:1.0.0

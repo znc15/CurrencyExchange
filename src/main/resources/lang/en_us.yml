@@ -1,0 +1,39 @@
+#       ____                                     _____          _
+#     / ___|   _ _ __ _ __ ___ _ __   ___ _   _| ____|_  _____| |__   __ _ _ __   __ _  ___
+#    | |  | | | | '__| '__/ _ \ '_ \ / __| | | |  _| \ \/ / __| '_ \ / _` | '_ \ / _` |/ _ \
+#    | |__| |_| | |  | | |  __/ | | | (__| |_| | |___ >  < (__| | | | (_| | | | | (_| |  __/
+#    \____\__,_|_|  |_|  \___|_| |_|\___|\__, |_____/_/\_\___|_| |_|\__,_|_| |_|\__, |\___|
+#                                        |___/                                  |___/
+#en_us.yml
+#
+messages:
+  usage: "&eUsage: /rp <v|p> <amount> | /rp confirm | /rp reload | /rp rate | /rp help | /rp cancel"
+  invalidAmount: "&cInvalid amount."
+  confirmCurrencyToPoints: "&aYou need %currency% currency to exchange for %points% points. Enter '/rp confirm' to confirm."
+  confirmPointsToCurrency: "&aYou need %points% points to exchange for %currency% currency. Enter '/rp confirm' to confirm."
+  notEnoughCurrency: "&cYou do not have enough currency."
+  notEnoughPoints: "&cYou do not have enough points."
+  successCurrencyToPoints: "&aSuccessfully exchanged %currency% currency for %points% points."
+  successPointsToCurrency: "&aSuccessfully exchanged %points% points for %currency% currency."
+  exchangeCancelled: "&eExchange cancelled."
+  nonPlayer: "&cThis command can only be executed by players."
+  noPendingRequest: "&eNo pending exchange request."
+  requestTimeout: "&eYour exchange request has timed out and been cancelled."
+  reloadSuccess: "&aConfiguration files reloaded successfully."
+  enterPointsAmount: "&ePlease enter the amount of points you want to exchange. Use /rp v <amount> to exchange."
+  enterCurrencyAmount: "&ePlease enter the amount of currency you want to exchange. Use /rp p <amount> to exchange."
+  currentExchangeRate: "&aCurrent in-game exchange rate: %rate%"
+  helpMessage: |
+    &eCommand Help:
+    &6/rp v <amount> &7- Exchange currency for points
+    &6/rp p <amount> &7- Exchange points for currency
+    &6/rp confirm &7- Confirm the current exchange request
+    &6/rp reload &7- Reload the configuration files
+    &6/rp rate &7- Show the current in-game exchange rate
+    &6/rp help &7- Show this help message
+    &6/rp cancel &7- Cancel the current exchange request
+  updateAvailable: "&eA new version is available! Visit https://github.com/znc15/CurrencyExchange to download the latest version."
+  noUpdateAvailable: "&aYou are using the latest version."
+  updateCheckFailed: "&cFailed to check for updates."
+
+#Version:1.0.0

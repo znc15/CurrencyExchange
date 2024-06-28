@@ -1,0 +1,13 @@
+name: CurrencyExchange
+version: 1.0.0
+main: com.littlesheep.CurrencyExchange
+api-version: 1.20
+author: YangXiaoMian
+softdepend: [PlaceholderAPI]
+depend: [Vault, PlayerPoints]
+commands:
+  rp:
+    description: 兑换货币和点券
+    usage: /rp <v|p> <数量> | /rp confirm | /rp reload | /rp rate
+    permission: currencyexchange.use
+    permission-message: 你没有权限使用这个命令。

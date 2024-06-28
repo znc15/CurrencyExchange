@@ -1,0 +1,55 @@
+#       ____                                     _____          _
+#     / ___|   _ _ __ _ __ ___ _ __   ___ _   _| ____|_  _____| |__   __ _ _ __   __ _  ___
+#    | |  | | | | '__| '__/ _ \ '_ \ / __| | | |  _| \ \/ / __| '_ \ / _` | '_ \ / _` |/ _ \
+#    | |__| |_| | |  | | |  __/ | | | (__| |_| | |___ >  < (__| | | | (_| | | | | (_| |  __/
+#    \____\__,_|_|  |_|  \___|_| |_|\___|\__, |_____/_/\_\___|_| |_|\__,_|_| |_|\__, |\___|
+#                                        |___/                                  |___/
+#config.yml
+#
+# 是否使用固定汇率
+# Whether to use a fixed exchange rate？
+useCustomRate: false
+# 固定汇率
+# Fixed exchange rate
+customRate: 100.0
+# 来源国家
+# sourceCountry
+sourceCountry: "USD"
+# 兑换国家
+# targetCountry
+targetCountry: "CNY"
+# 什么时候更新汇率（默认每天更新一次）
+# When to update the exchange rate (updated once a day by default)
+updateInterval: 86400
+# 动态倍率选项
+# Dynamic magnification options
+rateMultiplierType: "fixed" # fixed/dynamic
+# 固定倍率
+fixedRateMultiplier: 1.0
+# 动态倍率范围
+# Dynamic range
+dynamicRateMultiplierRange:
+  min: 0.5
+  max: 2.0
+# 动态倍率更新间隔，单位为秒
+# Dynamic rate update interval, in seconds
+dynamicRateMultiplierUpdateInterval: 3600
+# 是否开启bStats统计
+# Whether to enable bStats statistics？
+enablebStats: true
+# 是否开启在线更新
+# Whether to enable online update？
+checkForUpdates: true
+# 语言设置
+# Language settings
+language: "zh_cn"
+
+# Gui设置
+# Gui setting
+gui:
+  title: "&e选择兑换类型"
+  currencyToPoints: "&b货币兑换点券"
+  pointsToCurrency: "&a点券兑换货币"
+
+
+#Version:1.0.0
