@@ -5,11 +5,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class ConfigManager {
 
-    private final JavaPlugin plugin;
     private final FileConfiguration config;
 
     public ConfigManager(JavaPlugin plugin) {
-        this.plugin = plugin;
         this.config = plugin.getConfig();
     }
 

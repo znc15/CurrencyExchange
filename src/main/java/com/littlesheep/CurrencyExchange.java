@@ -1,7 +1,7 @@
 package com.littlesheep;
 
 import com.google.gson.Gson;
-import me.clip.placeholderapi.PlaceholderAPI;
+import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.economy.Economy;
 import org.black_ixx.playerpoints.PlayerPoints;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
@@ -9,8 +9,8 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -23,16 +23,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import net.md_5.bungee.api.ChatColor;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class CurrencyExchange extends JavaPlugin implements CommandExecutor, Listener {
 
@@ -69,7 +66,7 @@ public class CurrencyExchange extends JavaPlugin implements CommandExecutor, Lis
             return;
         }
 
-        this.getCommand("rp").setExecutor(this);
+        Objects.requireNonNull(this.getCommand("rp")).setExecutor(this);
         getServer().getPluginManager().registerEvents(this, this);
 
         // 注册 PAPI 扩展
@@ -89,7 +86,7 @@ public class CurrencyExchange extends JavaPlugin implements CommandExecutor, Lis
             public void run() {
                 updateExchangeRate();
             }
-        }.runTaskTimer(this, 0, configManager.getUpdateInterval() * 20); // 每24小时更新一次
+        }.runTaskTimer(this, 0, configManager.getUpdateInterval() * 20L); // 每24小时更新一次
 
         // 定时更新动态倍率
         if (getConfig().getString("rateMultiplierType", "fixed").equalsIgnoreCase("dynamic")) {
@@ -195,7 +192,7 @@ public class CurrencyExchange extends JavaPlugin implements CommandExecutor, Lis
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
             reloadConfigFiles();
             sender.sendMessage(getLangMessage("reloadSuccess"));
@@ -275,16 +272,18 @@ public class CurrencyExchange extends JavaPlugin implements CommandExecutor, Lis
     }
 
     private void openMainMenu(Player player) {
-        Inventory inv = Bukkit.createInventory(null, 9, ChatColor.translateAlternateColorCodes('&', getConfig().getString("gui.title")));
+        Inventory inv = Bukkit.createInventory(null, 9, ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(getConfig().getString("gui.title"))));
 
         ItemStack currencyToPoints = new ItemStack(Material.DIAMOND);
         ItemMeta ctpMeta = currencyToPoints.getItemMeta();
-        ctpMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', getConfig().getString("gui.currencyToPoints")));
+        ctpMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(getConfig().getString("gui.currencyToPoints"))));
         currencyToPoints.setItemMeta(ctpMeta);
 
         ItemStack pointsToCurrency = new ItemStack(Material.EMERALD);
         ItemMeta ptcMeta = pointsToCurrency.getItemMeta();
-        ptcMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', getConfig().getString("gui.pointsToCurrency")));
+        if (ptcMeta != null) {
+            ptcMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(getConfig().getString("gui.pointsToCurrency"))));
+        }
         pointsToCurrency.setItemMeta(ptcMeta);
 
         inv.setItem(3, currencyToPoints);
@@ -295,7 +294,7 @@ public class CurrencyExchange extends JavaPlugin implements CommandExecutor, Lis
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!event.getView().getTitle().equals(ChatColor.translateAlternateColorCodes('&', getConfig().getString("gui.title")))) {
+        if (!event.getView().getTitle().equals(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(getConfig().getString("gui.title"))))) {
             return;
         }
 
@@ -310,9 +309,9 @@ public class CurrencyExchange extends JavaPlugin implements CommandExecutor, Lis
 
         player.closeInventory();
 
-        if (displayName.equals(ChatColor.translateAlternateColorCodes('&', getConfig().getString("gui.currencyToPoints")))) {
+        if (displayName.equals(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(getConfig().getString("gui.currencyToPoints"))))) {
             player.sendMessage(getLangMessage("enterPointsAmount"));
-        } else if (displayName.equals(ChatColor.translateAlternateColorCodes('&', getConfig().getString("gui.pointsToCurrency")))) {
+        } else if (displayName.equals(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(getConfig().getString("gui.pointsToCurrency"))))) {
             player.sendMessage(getLangMessage("enterCurrencyAmount"));
         }
     }
