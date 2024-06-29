@@ -34,6 +34,9 @@ dynamicRateMultiplierRange:
 # 动态倍率更新间隔，单位为秒
 # Dynamic rate update interval, in seconds
 dynamicRateMultiplierUpdateInterval: 3600
+# 选择货币是sourceCountry还是targetCountry
+# Select the currency sourceCountry or targetCountry
+currencyDisplay: "source" # source / target
 # 是否开启bStats统计
 # Whether to enable bStats statistics？
 enablebStats: true
@@ -50,6 +53,8 @@ gui:
   title: "&e选择兑换类型"
   currencyToPoints: "&b货币兑换点券"
   pointsToCurrency: "&a点券兑换货币"
+
+
 
 
 #Version:1.0.0
