@@ -1,7 +1,7 @@
 package com.littlesheep;
 
 import com.google.gson.Gson;
-import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.milkbowl.vault.economy.Economy;
 import org.black_ixx.playerpoints.PlayerPoints;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
@@ -147,6 +147,12 @@ public class CurrencyExchange extends JavaPlugin implements CommandExecutor, Lis
             saveResource("lang/" + languageFileName, false);
         }
         langConfig = YamlConfiguration.loadConfiguration(langFile);
+
+        // 确保en_us.yml文件也被释放
+        File enLangFile = new File(getDataFolder(), "lang/en_us.yml");
+        if (!enLangFile.exists()) {
+            saveResource("lang/en_us.yml", false);
+        }
     }
 
     private void updateRateMultiplier() {
@@ -314,8 +320,8 @@ public class CurrencyExchange extends JavaPlugin implements CommandExecutor, Lis
     private void handleCurrencyToPoints(Player player, double points) {
         double requiredCurrency = points * exchangeRate * rateMultiplier;
         player.sendMessage(getLangMessage("confirmCurrencyToPoints")
-                .replace("%currency%", String.valueOf(requiredCurrency))
-                .replace("%points%", String.valueOf(points)));
+                .replace("%currency%", String.valueOf(Math.round(requiredCurrency)))
+                .replace("%points%", String.valueOf(Math.round(points))));
         pendingRequests.put(player.getUniqueId(), new ExchangeRequest(requiredCurrency, points, true));
         startTimeout(player);
     }
@@ -323,8 +329,8 @@ public class CurrencyExchange extends JavaPlugin implements CommandExecutor, Lis
     private void handlePointsToCurrency(Player player, double currency) {
         double requiredPoints = currency / exchangeRate / rateMultiplier;
         player.sendMessage(getLangMessage("confirmPointsToCurrency")
-                .replace("%currency%", String.valueOf(currency))
-                .replace("%points%", String.valueOf(requiredPoints)));
+                .replace("%currency%", String.valueOf(Math.round(currency)))
+                .replace("%points%", String.valueOf(Math.round(requiredPoints))));
         pendingRequests.put(player.getUniqueId(), new ExchangeRequest(currency, requiredPoints, false));
         startTimeout(player);
     }
@@ -337,22 +343,22 @@ public class CurrencyExchange extends JavaPlugin implements CommandExecutor, Lis
         }
 
         if (request.isCurrencyToPoints()) {
-            if (economy.getBalance(player) >= request.getCurrency()) {
-                economy.withdrawPlayer(player, request.getCurrency());
-                playerPointsAPI.give(player.getUniqueId(), (int) request.getPoints());
+            if (economy.getBalance(player) >= Math.round(request.getCurrency())) {
+                economy.withdrawPlayer(player, Math.round(request.getCurrency()));
+                playerPointsAPI.give(player.getUniqueId(), (int) Math.round(request.getPoints()));
                 player.sendMessage(getLangMessage("successCurrencyToPoints")
-                        .replace("%currency%", String.valueOf(request.getCurrency()))
-                        .replace("%points%", String.valueOf(request.getPoints())));
+                        .replace("%currency%", String.valueOf(Math.round(request.getCurrency())))
+                        .replace("%points%", String.valueOf(Math.round(request.getPoints()))));
             } else {
                 player.sendMessage(getLangMessage("notEnoughCurrency"));
             }
         } else {
-            if (playerPointsAPI.look(player.getUniqueId()) >= request.getPoints()) {
-                playerPointsAPI.take(player.getUniqueId(), (int) request.getPoints());
-                economy.depositPlayer(player, request.getCurrency());
+            if (playerPointsAPI.look(player.getUniqueId()) >= Math.round(request.getPoints())) {
+                playerPointsAPI.take(player.getUniqueId(), (int) Math.round(request.getPoints()));
+                economy.depositPlayer(player, Math.round(request.getCurrency()));
                 player.sendMessage(getLangMessage("successPointsToCurrency")
-                        .replace("%points%", String.valueOf(request.getPoints()))
-                        .replace("%currency%", String.valueOf(request.getCurrency())));
+                        .replace("%points%", String.valueOf(Math.round(request.getPoints())))
+                        .replace("%currency%", String.valueOf(Math.round(request.getCurrency()))));
             } else {
                 player.sendMessage(getLangMessage("notEnoughPoints"));
             }

@@ -40,7 +40,7 @@ public class CurrencyExchangePlaceholder extends PlaceholderExpansion {
     public String onPlaceholderRequest(Player player, String identifier) {
         if (identifier.equals("rate")) {
             double gameRate = plugin.getExchangeRate() * plugin.getRateMultiplier();
-            return String.format("%.2f", gameRate);
+            return String.valueOf(gameRate);
         }
 
         return null;
